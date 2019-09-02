@@ -1,0 +1,127 @@
+server:
+  port: 8082
+app:
+  id: service-center
+
+##datasource
+spring:
+  application:
+    name: enovate-newretail-score
+  profiles:
+    active: apollo-env.properties
+  datasource:
+    url: jdbc:mysql://122.112.225.64:3306/novat-dev?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: novat-dev
+    password: Enovate@2019
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 3000
+      pool-name: DatebookHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  redis:
+    host: 127.0.0.1
+    password: 123456
+    port: 6378
+    database: 2
+    lettuce:
+      pool:
+        min-idle: 0
+        max-idle: 6
+        max-wait: -1ms
+        max-active: 6
+      shutdown-timeout: 200ms
+  cache:
+    type: redis
+  data:
+    mongodb:
+      host: 127.0.0.1
+      port: 27017
+      database: test
+      username:
+      password:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 0
+      max-file-size: 10MB
+      max-request-size: 30MB
+  mail:
+    host: mail.xinhehui.com
+    username: loandispatch
+    password: xhh@2017
+    properties:
+      mail:
+        smtp:
+          auth: false
+          timeout: 25000
+          starttls:
+            enable: false
+            required: false
+
+
+mybatis:
+  mapper-locations: classpath:/mapper/**/*.xml
+  #type-aliases-package: com.enovate.newretail.score.entity
+
+
+
+
+swagger:
+  enable: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+loginTokenSecret: A6CDB1A5958C259F178BC962108474E4
+
+#logging
+logging:
+  path: /Users/kks/Develop/log/
+  file:
+    max-size: 50MB
+    max-history: 30
+#  config: classpath:logback-spring.xml
+
+
+repos:
+  perf:
+    pattern: xx*/perf, */pref ##as the fist character can't be a wild card but it can accept multiple value.
+    uri: https://github.com/rseroter/pluralsight-spring-cloudconfig-wa-tolls-perf
+
+snowflake:
+  workerId: 1
+  datacenterId: 1
+  
+org:
+    dromara:
+         hmily :
+            serializer: kryo
+            recoverDelayTime: 30
+            retryMax: 3
+            scheduledDelay: 30
+            scheduledThreadMax:  10
+            repositorySupport: db
+            hmilyDbConfig:
+              driverClassName: com.mysql.jdbc.Driver
+              url:  jdbc:mysql://localhost:3306/tcc?useUnicode=true&amp&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+              username: root
+              password: 1996
+            hmilyMongoConfig:
+               mongoDbUrl: 10.12.0.73:27017
+               mongoDbName: test
+               mongoUserName: test
+               mongoUserPwd: enovate
+
+enovate:
+  service:
+    user:
+      name: enovate-newretail-user
